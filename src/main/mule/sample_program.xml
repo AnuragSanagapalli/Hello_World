@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="6333ca17-688e-4abe-a168-cf22502798f1" basePath="/hello" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<http:listener-config name="HTTP_Listener_config1" doc:name="HTTP Listener config" doc:id="86c71e92-f394-435d-a85b-a23a5e558041" basePath="/sample" >
+		<http:listener-connection host="0.0.0.0" port="4001" />
+	</http:listener-config>
+	<flow name="sample_programFlow" doc:id="209208a7-8e6c-4b9c-a4a3-552cfdd0811e" >
+		<http:listener doc:name="Listener" doc:id="aa5ab08d-08be-4add-9464-da5deeaaa382" config-ref="HTTP_Listener_config1" allowedMethods="GET" path="/">
+			<ee:repeatable-file-store-stream />
+		</http:listener>
+		<set-payload value="Hello Anurag" doc:name="Set Payload" doc:id="3c2b8805-bb8b-4d9c-b0f6-007bd196ac3e" />
+	</flow>
+</mule>
